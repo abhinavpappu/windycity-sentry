@@ -1,4 +1,3 @@
-from twython import Twython 
 from nltk.stem import WordNetLemmatizer
 import nltk
 import json
@@ -8,6 +7,7 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 from nltk.tokenize import word_tokenize
 from nltk.corpus import wordnet as wn
+import messager
     
 hot = ['toxic', 'shoot', 'shot', 'blood', 'bleed', 'viru', 'kill', 'murder', 'injur', 'harm', 'attack', 'offend', 'arm', 'gun', 'steal', 'stole', 'robberi', 'punch', 'fire', 'infect', 'sti', 'sexual', 'rape', 'explos', 'explod', 'food-born', 'ill', 'salmonella', 'ebola', 'coli', 'gun', 'loos', 'stole', 'disast', 'tornado', 'hurrican', 'storm', 'sex', 'harrass', 'offend', 'killer', 'serial', 'bomb', 'threat', 'close', 'fled', 'flee', 'escap', 'flood', 'contamin', 'expos', 'danger', 'lose', 'fire', 'nake', 'broke', 'substanc', 'fight', 'fought']
 
@@ -43,8 +43,8 @@ class TweetListener(StreamListener):
         for keyword in hot:
             if (keyword in text):
                 num_matched += 1
-        print (text)
-        print ("Num matched: " + str(num_matched))
+        if (num_matched >= 1):
+            messager.send ("New Alert Nearby: " + tweet['text'])
         return True
     def on_error(self, status):
         print ("Error: %s" % status)
@@ -54,4 +54,5 @@ auth = OAuthHandler(client_key, client_secret)
 auth.set_access_token(token, token_secret)
 stream = Stream(auth, listener)
 print ("Listening to twitter")
-stream.filter(follow=["522052782"])
+# stream.filter(follow=["522052782"])
+stream.filter (follow=["720733640796336128"])
