@@ -33,11 +33,11 @@ while(True):
                 keywords_threshold=0.01,
                 inactivity_timeout=300
             ).get_result()
-            print('Recognized ' + filenames[0] + ' in ' + str(time.time() - seconds) + ' seconds')
+            # print('Recognized ' + filenames[0] + ' in ' + str(time.time() - seconds) + ' seconds')
             # print(json.dumps(speech_recognition_results, indent=2))
             text, keywords = getTextAndKeywords(speech_recognition_results)
-            print(text)
-            print(keywords)
+            # print(text)
+            # print(keywords)
             if (len(keywords) > 0) {
                 messager.send(text)
             } 

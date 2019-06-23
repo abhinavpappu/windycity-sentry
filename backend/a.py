@@ -20,7 +20,7 @@ while(True):
   with open('audio/' + str(num) + '.mp3', 'wb') as f:
     try:
       for block in r.iter_content(1024):
-        print(str(num) + '.mp3 ' + str(time.time() - seconds) + 's')
+        # print(str(num) + '.mp3 ' + str(time.time() - seconds) + 's')
         f.write(block)
         if (time.time() - seconds >= 60):
           num += 1
