@@ -22,7 +22,7 @@ def getTextAndKeywords(json):
     return (text.strip(), keywords)
 
 while(True):
-    filenames = sorted(listdir('audio'))
+    filenames = sorted([f for f in listdir('audio') if not f.startswith('.')])
     if (len(filenames) > 1): # if there is only one file, it is probably being currently written to
         with open('audio/' + filenames[0], 'rb') as audio_file:
             seconds = time.time()
