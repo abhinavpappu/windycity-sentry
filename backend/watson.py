@@ -2,6 +2,7 @@ from ibm_watson import SpeechToTextV1
 import time
 import json
 from os import listdir, remove
+import messager
 
 hot = ["intoxicated", "intoxicate", "toxic", "shooting","shoot","shot","blood","bleeding","virus","killed","kill","murder","murdering","murdered","injured","injury","harm","harmed","harming","attacker","offender","armed","arms","gun","steal","stole","robbery","punching","fired","fire","infected","STI","sexually","rape","raping","raped","explosion","explode","exploded","food-borne","illness","salmonella","ebola","coli","gunned","loose","disaster","tornado","hurricane","storm","sex","harrassment","harrasser","offender","killer","serial","bomb","bombing","threat","threatened","threatening","closed","close","fled","flee","escaped","flood","flooding","contaminated","contamination","contaminate","exposing","danger","lose","fire","naked","broke","substance","fight", "stolen"]
 
@@ -37,6 +38,9 @@ while(True):
             text, keywords = getTextAndKeywords(speech_recognition_results)
             print(text)
             print(keywords)
+            if (len(keywords) > 0) {
+                messager.send(text)
+            } 
 
 
         remove('audio/' + filenames[0])
