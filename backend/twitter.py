@@ -8,7 +8,6 @@ from tweepy import Stream
 from nltk.tokenize import word_tokenize
 from nltk.corpus import wordnet as wn
 import messager
-import config
     
 hot = ['toxic', 'shoot', 'shot', 'blood', 'bleed', 'viru', 'kill', 'murder', 'injur', 'harm', 'attack', 'offend', 'arm', 'gun', 'steal', 'stole', 'robberi', 'punch', 'fire', 'infect', 'sti', 'sexual', 'rape', 'explos', 'explod', 'food-born', 'ill', 'salmonella', 'ebola', 'coli', 'gun', 'loos', 'stole', 'disast', 'tornado', 'hurrican', 'storm', 'sex', 'harrass', 'offend', 'killer', 'serial', 'bomb', 'threat', 'close', 'fled', 'flee', 'escap', 'flood', 'contamin', 'expos', 'danger', 'lose', 'fire', 'nake', 'broke', 'substanc', 'fight', 'fought']
 
