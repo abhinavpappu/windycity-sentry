@@ -38,9 +38,8 @@ while(True):
             text, keywords = getTextAndKeywords(speech_recognition_results)
             # print(text)
             # print(keywords)
-            if (len(keywords) > 0) {
+            if (len(keywords) > 0):
                 messager.send(text)
-            } 
 
 
         remove('audio/' + filenames[0])
