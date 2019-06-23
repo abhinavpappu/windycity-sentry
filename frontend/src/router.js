@@ -13,7 +13,7 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: Login,
     },
     {
       path: '/about',
@@ -23,11 +23,11 @@ const router = new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login,
-    },
+    // {
+    //   path: '/login',
+    //   name: 'login',
+    //   component: Login,
+    // },
     {
       path: '/details',
       name: 'details',

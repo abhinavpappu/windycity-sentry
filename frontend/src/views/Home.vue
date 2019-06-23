@@ -1,5 +1,8 @@
 <template>
-  <router-link to="/login">Login</router-link>
+  <div>
+    <v-img :src="require('../assets/logo.svg')"/>
+    <router-link to="/login"><v-btn>Login</v-btn></router-link>
+  </div>
 </template>
 
 <script>

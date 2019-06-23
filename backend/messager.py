@@ -6,9 +6,9 @@ carriers = {
 	'sprint':   '@page.nextel.com'
 }
 
-def send(message):
+def send(message, number=8472121483, carrier='att'):
 		# Replace the number with your own, or consider using an argument\dict for multiple people.
-	to_number = '8472121483{}'.format(carriers['att'])
+	to_number = str(number) + '{}'.format(carriers[carrier])
 	auth = ('sentry.chicagoalerts@gmail.com', 'windycity2019')
 
 	try:

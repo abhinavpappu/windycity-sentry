@@ -8,6 +8,7 @@ from tweepy import Stream
 from nltk.tokenize import word_tokenize
 from nltk.corpus import wordnet as wn
 import messager
+import config
     
 hot = ['toxic', 'shoot', 'shot', 'blood', 'bleed', 'viru', 'kill', 'murder', 'injur', 'harm', 'attack', 'offend', 'arm', 'gun', 'steal', 'stole', 'robberi', 'punch', 'fire', 'infect', 'sti', 'sexual', 'rape', 'explos', 'explod', 'food-born', 'ill', 'salmonella', 'ebola', 'coli', 'gun', 'loos', 'stole', 'disast', 'tornado', 'hurrican', 'storm', 'sex', 'harrass', 'offend', 'killer', 'serial', 'bomb', 'threat', 'close', 'fled', 'flee', 'escap', 'flood', 'contamin', 'expos', 'danger', 'lose', 'fire', 'nake', 'broke', 'substanc', 'fight', 'fought']
 
@@ -24,28 +25,34 @@ token_secret = "R81HuP9KK1N8mTHFABuyzTbldA9E5A9qSu2MwH19cyNnW"
 class TweetListener(StreamListener):
     
     def on_data(self, data):
-        tweet = json.loads(data)
-        # Send Tweet To Slack Notification
-        print (tweet)
-        text = tweet['text']
-        text = text.split ('\n')
-        if (len (text) == 4):
-            address = text[1]
-            text = text[2]
-        elif (len(text)==3):
-            address = ""
-            text = text[1]
-        else:
-            address = ""
-            text = text[0]
-        stemmer.stem(text)
-        num_matched = 0
-        for keyword in hot:
-            if (keyword in text):
-                num_matched += 1
-        if (num_matched >= 1):
-            messager.send ("New Alert Nearby: " + tweet['text'])
-        return True
+        try:
+            tweet = json.loads(data)
+            # Send Tweet To Slack Notification
+            print (tweet)
+            text = tweet['text']
+            text = text.split ('\n')
+            if (len (text) == 4):
+                address = text[1]
+                text = text[2]
+            elif (len(text)==3):
+                address = ""
+                text = text[1]
+            else:
+                address = ""
+                text = text[0]
+            stemmer.stem(text)
+            num_matched = 0
+            for keyword in hot:
+                if (keyword in text):
+                    num_matched += 1
+            if (num_matched >= 1):
+                messager.send ("New Alert Nearby: " + tweet['text'], carrier='att')
+                messager.send ("New Alert Nearby: " + tweet['text'], carrier='tmobile')
+                messager.send ("New Alert Nearby: " + tweet['text'], carrier='sprint')
+                messager.send ("New Alert Nearby: " + tweet['text'], carrier='verizon')
+            return True
+        except:
+            return True
     def on_error(self, status):
         print ("Error: %s" % status)
 

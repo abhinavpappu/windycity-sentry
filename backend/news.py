@@ -30,7 +30,10 @@ for i in range (len (news['articles'])):
         except:
             num_matched = 0
     if (num_matched >= 1):
-        messager.send ("The news article said: " + desc)
+        messager.send ("The news article said: " + desc, carrier='att')
+        messager.send ("The news article said: " + desc, carrier='tmobile')
+        messager.send ("The news article said: " + desc, carrier='verizon')
+        messager.send ("The news article said: " + desc, carrier='sprint')
         print ("Num matched: " + str(num_matched))
 
 print (time.time() - start)
