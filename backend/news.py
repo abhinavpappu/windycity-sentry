@@ -25,7 +25,7 @@ for i in range (len (news['articles'])):
     desc = (news['articles'][i]['description'])
     for keyword in newskeys:
         try:
-            if (keyword in desc):
+            if (keyword in desc.lower()):
                 num_matched += 1
         except:
             num_matched = 0

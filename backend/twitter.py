@@ -43,7 +43,7 @@ class TweetListener(StreamListener):
             stemmer.stem(text)
             num_matched = 0
             for keyword in hot:
-                if (keyword in text):
+                if (keyword in text.lower()):
                     num_matched += 1
             if (num_matched >= 1):
                 messager.send ("New Alert Nearby: " + tweet['text'], carrier='att')

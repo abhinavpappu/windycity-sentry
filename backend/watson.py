@@ -9,17 +9,15 @@ from firebase_admin import firestore
 import zone
 
 # Use the application default credentials
-cred = credentials.ApplicationDefault()
-firebase_admin.initialize_app(cred, {
-  'projectId': 'windyhacks-9b684',
-})
+cred = credentials.Certificate('./cred1.json')
+firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
 hot = ["intoxicated", "intoxicate", "toxic", "shooting","shoot","shot","blood","bleeding","virus","killed","kill","murder","murdering","murdered","injured","injury","harm","harmed","harming","attacker","offender","armed","arms","gun","steal","stole","robbery","punching","fired","fire","infected","STI","sexually","rape","raping","raped","explosion","explode","exploded","food-borne","illness","salmonella","ebola","coli","gunned","loose","disaster","tornado","hurricane","storm","sex","harrassment","harrasser","offender","killer","serial","bomb","bombing","threat","threatened","threatening","closed","close","fled","flee","escaped","flood","flooding","contaminated","contamination","contaminate","exposing","danger","lose","fire","naked","broke","substance","fight", "stolen"]
 
 speech_to_text = SpeechToTextV1(
-    iam_apikey='a4By9TpOilGWOc70kYPHzCKYzxocA2SFoX48ta2AoxJ7',
+    iam_apikey='V_g8OgIsLNpHPQ9PBTF1i_0LnflSXmsiJiMQOZ6HOjTH',
     url='https://stream.watsonplatform.net/speech-to-text/api'
 )
 
@@ -34,7 +32,7 @@ def getTextAndKeywords(json):
     return (text.strip(), keywords)
 
 while(True):
-    filenames = sorted([f for f in listdir('audio') if not f.startswith('.')])
+    filenames = sorted([f for f in listdir('audio') if not f.startswith('.')], key= lambda x : int(x.split('.')[0]))
     if (len(filenames) > 1): # if there is only one file, it is probably being currently written to
         with open('audio/' + filenames[0], 'rb') as audio_file:
             seconds = time.time()
@@ -53,12 +51,14 @@ while(True):
                 print(text)
                 print(keywords)
                 if (len(keywords) > 0):
-                    docs = db.collection('users').get()
-                    for doc in docs:
-                        thing = doc.to_dict()
-                        if (zone.which_zone(thing['longitude'], thing['latitude']) == 4):
-                            messager.send("Police Radio Broadcast: "+text+"\nKeyword(s) Found: "+keywords, thing.phoneNumber)
-            except:
+                    messager.send("Police Radio Broadcast: "+text+"\nKeyword(s) Found: "+str(keywords))
+                    # docs = db.collection('users').get()
+                    # for doc in docs:
+                    #     thing = doc.to_dict()
+                    #     if (zone.which_zone(thing['longitude'], thing['latitude']) == 4):
+                    #         messager.send("Police Radio Broadcast: "+text+"\nKeyword(s) Found: "+keywords, thing.phoneNumber)
+            except Exception as e:
+                print(e)
                 pass
 
         try:
