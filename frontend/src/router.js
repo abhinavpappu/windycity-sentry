@@ -37,7 +37,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if (!localStorage.currentUser && to.name != 'home' && to.name != 'login') {
+  if (!localStorage.currentUserId && to.name != 'home' && to.name != 'login') {
     next('/login');
   }
   next();

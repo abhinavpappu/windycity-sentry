@@ -5,15 +5,30 @@
       <v-text-field mask="phone" label="Phone Number" v-model="phoneNumber"></v-text-field>
       
       <div class="empty-space"/>
+      <v-btn class="save-button" color="info" @click="save">Save</v-btn>
     </div>
   </div>
 </template>
 
 <script>
+import { db } from "../firebase";
+
 export default {
   data() {
     return {
       phoneNumber: "",
+    }
+  },
+  methods: {
+    save() {
+      const isValidPhoneNumber = true; //TODO
+      if (isValidPhoneNumber) {
+        const dbUser = db.collection('users')
+          .doc(localStorage.currentUserId).set({
+            phoneNumber: this.phoneNumber
+          });
+        console.log(dbUser);
+      }
     }
   }
 }
@@ -41,6 +56,8 @@ export default {
 
   .save-button
     position: absolute
+    right: 20px
+    bottom: 20px
     
 
 </style>

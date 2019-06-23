@@ -12,7 +12,7 @@ const firebaseConfig = {
 };
 
 export const uiConfig = {
-  signInSuccessUrl: '/',
+  signInSuccessUrl: '/details',
   signInOptions: [
     // Leave the lines as is for the providers you want to offer your users.
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -27,6 +27,8 @@ export const uiConfig = {
     window.location.assign('https://google.com');
   }
 };
+
+window.firebase = firebase;
 
 // Get a Firestore instance
 export const db = firebase

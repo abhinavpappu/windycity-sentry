@@ -3,6 +3,7 @@ import './plugins/vuetify'
 import App from './App.vue';
 import router from './router';
 import { firestorePlugin } from 'vuefire'
+import { db } from "./firebase";
 
 Vue.use(firestorePlugin)
 
@@ -39,6 +40,12 @@ BackgroundGeolocation.configure({
 
 BackgroundGeolocation.on('location', function(location) {
   console.log(location);
+  if (localStorage.currentUserId) {
+    db.collection('users').doc(localStorage.currentUserId).set({
+      latitude: location.latitude,
+      longitude: location.longitude,
+    });
+  }
 });
 
 BackgroundGeolocation.on('stationary', function(stationaryLocation) {
@@ -47,14 +54,6 @@ BackgroundGeolocation.on('stationary', function(stationaryLocation) {
 
 BackgroundGeolocation.on('error', function(error) {
   console.log('[ERROR] BackgroundGeolocation error:', error.code, error.message);
-});
-
-BackgroundGeolocation.on('start', function() {
-  console.log('[INFO] BackgroundGeolocation service has been started');
-});
-
-BackgroundGeolocation.on('stop', function() {
-  console.log('[INFO] BackgroundGeolocation service has been stopped');
 });
 
 BackgroundGeolocation.on('authorization', function(status) {
@@ -68,30 +67,6 @@ BackgroundGeolocation.on('authorization', function(status) {
       }
     }, 1000);
   }
-});
-
-BackgroundGeolocation.on('background', function() {
-  console.log('[INFO] App is in background');
-  // you can also reconfigure service (changes will be applied immediately)
-  BackgroundGeolocation.configure({ debug: true });
-});
-
-BackgroundGeolocation.on('foreground', function() {
-  console.log('[INFO] App is in foreground');
-  BackgroundGeolocation.configure({ debug: false });
-});
-
-BackgroundGeolocation.on('abort_requested', function() {
-  console.log('[INFO] Server responded with 285 Updates Not Required');
-
-  // Here we can decide whether we want stop the updates or not.
-  // If you've configured the server to return 285, then it means the server does not require further update.
-  // So the normal thing to do here would be to `BackgroundGeolocation.stop()`.
-  // But you might be counting on it to receive location updates in the UI, so you could just reconfigure and set `url` to null.
-});
-
-BackgroundGeolocation.on('http_authorization', () => {
-  console.log('[INFO] App needs to authorize the http requests');
 });
 
 BackgroundGeolocation.checkStatus(function(status) {

@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <div class="card" id="firebase-auth">
-      
+  <div class="login">
+    <div id="firebase-auth">
     </div>
   </div>
 </template>
@@ -30,8 +29,11 @@ export default {
 <style lang="sass" scoped>
 @import '~firebaseui/dist/firebaseui.css'
 
-.thing
-  height: 500px
+.login
+  display: flex
+  align-items: center
+  justify-content: center
+  height: 100vh
 
 </style>
 
