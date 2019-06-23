@@ -24,7 +24,7 @@ export default {
       const isValidPhoneNumber = true; //TODO
       if (isValidPhoneNumber) {
         const dbUser = db.collection('users')
-          .doc(localStorage.currentUserId).set({
+          .doc(localStorage.currentUserId).update({
             phoneNumber: this.phoneNumber
           });
         console.log(dbUser);

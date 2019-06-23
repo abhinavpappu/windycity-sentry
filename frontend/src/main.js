@@ -41,7 +41,7 @@ BackgroundGeolocation.configure({
 BackgroundGeolocation.on('location', function(location) {
   console.log(location);
   if (localStorage.currentUserId) {
-    db.collection('users').doc(localStorage.currentUserId).set({
+    db.collection('users').doc(localStorage.currentUserId).update({
       latitude: location.latitude,
       longitude: location.longitude,
     });

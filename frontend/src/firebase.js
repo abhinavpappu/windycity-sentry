@@ -11,23 +11,6 @@ const firebaseConfig = {
   appId: "1:473432639923:web:7685b9dc5316d6eb"
 };
 
-export const uiConfig = {
-  signInSuccessUrl: '/details',
-  signInOptions: [
-    // Leave the lines as is for the providers you want to offer your users.
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-  ],
-  // tosUrl and privacyPolicyUrl accept either url string or a callback
-  // function.
-  // Terms of service url/callback.
-  tosUrl: 'https://google.com',
-  // Privacy policy url/callback.
-  privacyPolicyUrl: function() {
-    window.location.assign('https://google.com');
-  }
-};
-
 window.firebase = firebase;
 
 // Get a Firestore instance
