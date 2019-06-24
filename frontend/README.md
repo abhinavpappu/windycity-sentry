@@ -1,4 +1,4 @@
-# shopacity
+# sentry
 
 ## Project setup
 ```
